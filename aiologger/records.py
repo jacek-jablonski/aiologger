@@ -32,11 +32,11 @@ class LogRecord:
         pathname: str,
         lineno: int,
         msg,
-        args: Optional[Tuple[Mapping]] = None,
-        exc_info: Optional[ExceptionInfo] = None,
-        func: Optional[str] = None,
-        sinfo: Optional[str] = None,
-        **kwargs,
+        args = None,
+        exc_info = None,
+        func = None,
+        sinfo = None,
+        **kwargs
     ) -> None:
         """
         :param name: The name of the logger used to log the event represented
@@ -65,14 +65,13 @@ class LogRecord:
         created_at = time.time()
         self.name = name
         self.msg = msg
-        self.args: Optional[Mapping]
         if args:
             if len(args) != 1 or not isinstance(args[0], Mapping):
                 raise ValueError(
                     f"Invalid LogRecord args type: {type(args[0])}. "
                     f"Expected Mapping"
                 )
-            self.args: Optional[Mapping] = args[0]
+            self.args = args[0]
         else:
             self.args = args
         self.levelname = get_level_name(level)
@@ -85,15 +84,15 @@ class LogRecord:
             self.filename = pathname
             self.module = "Unknown module"
         self.exc_info = exc_info
-        self.exc_text: Optional[str] = None  # used to cache the traceback text
+        self.exc_text = None  # used to cache the traceback text
         self.stack_info = sinfo
         self.lineno = lineno
         self.funcName = func
         self.created = created_at
         self.msecs = (created_at - int(created_at)) * 1000
         self.process = os.getpid()
-        self.asctime: Optional[str] = None
-        self.message: Optional[str] = None
+        self.asctime = None
+        self.message = None
 
     def __str__(self):
         return (
@@ -126,7 +125,7 @@ class ExtendedLogRecord(LogRecord):
         exc_info: Optional[ExceptionInfo],
         func: Optional[str] = None,
         sinfo: Optional[str] = None,
-        **kwargs,
+        **kwargs
     ) -> None:
         super().__init__(
             name, level, pathname, lineno, msg, args, exc_info, func, sinfo
