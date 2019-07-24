@@ -29,14 +29,14 @@ class AsyncFileHandler(Handler):
         mode: str = "a",
         encoding: str = None,
         *,
-        loop: Optional[AbstractEventLoop] = None,
+        loop: Optional[AbstractEventLoop] = None
     ) -> None:
         super().__init__(loop=loop)
         filename = os.fspath(filename)
         self.absolute_file_path = os.path.abspath(filename)
         self.mode = mode
         self.encoding = encoding
-        self.stream: AsyncTextIOWrapper = None
+        self.stream = None
         self._initialization_lock = None
 
     @property
@@ -96,7 +96,7 @@ class BaseAsyncRotatingFileHandler(AsyncFileHandler, metaclass=abc.ABCMeta):
         namer: Namer = None,
         rotator: Rotator = None,
         *,
-        loop: Optional[AbstractEventLoop] = None,
+        loop: Optional[AbstractEventLoop] = None
     ) -> None:
         super().__init__(filename, mode, encoding, loop=loop)
         self.mode = mode
@@ -218,7 +218,7 @@ class AsyncTimedRotatingFileHandler(BaseAsyncRotatingFileHandler):
         utc: bool = False,
         at_time: datetime.time = None,
         *,
-        loop: Optional[AbstractEventLoop] = None,
+        loop: Optional[AbstractEventLoop] = None
     ) -> None:
         super().__init__(
             filename=filename, mode="a", encoding=encoding, loop=loop
