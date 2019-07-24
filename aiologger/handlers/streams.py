@@ -21,7 +21,7 @@ class AsyncStreamHandler(Handler):
         formatter: Formatter = None,
         filter: Filter = None,
         *,
-        loop: Optional[AbstractEventLoop] = None,
+        loop: Optional[AbstractEventLoop] = None
     ) -> None:
         super().__init__(loop=loop)
         if stream is None:
@@ -30,12 +30,12 @@ class AsyncStreamHandler(Handler):
         self.level = level
         if formatter is None:
             formatter = Formatter()
-        self.formatter: Formatter = formatter
+        self.formatter = formatter
         if filter:
             self.add_filter(filter)
         self.protocol_class = AiologgerProtocol
         self._initialization_lock = asyncio.Lock()
-        self.writer: Optional[StreamWriter] = None
+        self.writer = None
 
     @property
     def initialized(self):
