@@ -54,7 +54,7 @@ class Logger(Filterer):
         self._loop = loop
         self._was_shutdown = False
 
-        self._dummy_task: Optional[Task] = None
+        self._dummy_task = None
 
     @property
     def loop(self) -> AbstractEventLoop:
