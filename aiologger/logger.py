@@ -71,7 +71,7 @@ class Logger(Filterer):
         level=LogLevel.NOTSET,
         formatter = None,
         loop = None,
-        **kwargs,
+        **kwargs
     ):
         self = cls(name=name, level=level, loop=loop, **kwargs)  # type: ignore
         self.add_handler(
