@@ -49,7 +49,7 @@ class JsonFormatter(Formatter):
         already a dict, initializes a new dict and uses `default_msg_fieldname`
         as a key as the record msg as the value.
         """
-        msg: Union[str, dict] = record.msg
+        msg = record.msg
         if not isinstance(msg, dict):
             msg = {self.default_msg_fieldname: msg}
 
@@ -62,7 +62,6 @@ class JsonFormatter(Formatter):
 
     @classmethod
     def format_error_msg(cls, record: LogRecord, exception: Exception) -> Dict:
-        traceback_info: Optional[List[str]]
         if exception.__traceback__:
             traceback_info = cls.format_traceback(exception.__traceback__)
         else:
