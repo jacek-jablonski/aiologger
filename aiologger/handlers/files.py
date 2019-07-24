@@ -32,7 +32,6 @@ class AsyncFileHandler(Handler):
         loop: Optional[AbstractEventLoop] = None
     ) -> None:
         super().__init__(loop=loop)
-        filename = os.fspath(filename)
         self.absolute_file_path = os.path.abspath(filename)
         self.mode = mode
         self.encoding = encoding
