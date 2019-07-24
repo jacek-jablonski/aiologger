@@ -32,15 +32,15 @@ class Handler(Filterer):
         level: LogLevel = LogLevel.NOTSET,
         *,
         loop: Optional[AbstractEventLoop] = None,
-    ) -> None:
+    ):
         """
         Initializes the instance - basically setting the formatter to None
         and the filter list to empty.
         """
         Filterer.__init__(self)
         self._level = check_level(level)
-        self.formatter: Formatter = _default_formatter
-        self._loop: Optional[asyncio.AbstractEventLoop] = loop
+        self.formatter = _default_formatter
+        self._loop = loop
 
     @property
     def loop(self):
@@ -60,7 +60,7 @@ class Handler(Filterer):
         self._level = check_level(value)
 
     @abc.abstractmethod
-    async def emit(self, record: LogRecord) -> None:
+    async def emit(self, record: LogRecord):
         """
         Do whatever it takes to actually log the specified logging record.
 
@@ -71,7 +71,7 @@ class Handler(Filterer):
             "emit must be implemented by Handler subclasses"
         )
 
-    async def handle(self, record: LogRecord) -> bool:
+    async def handle(self, record: LogRecord):
         """
         Conditionally emit the specified logging record.
 
@@ -83,7 +83,7 @@ class Handler(Filterer):
             await self.emit(record)
         return rv
 
-    async def flush(self) -> None:
+    async def flush(self):
         """
         Ensure all logging output has been flushed.
 
@@ -108,7 +108,7 @@ class Handler(Filterer):
 
     async def handle_error(
         self, record: LogRecord, exception: Exception
-    ) -> None:
+    ):
         """
         Handle errors which occur during an emit() call.
 
@@ -128,4 +128,7 @@ class Handler(Filterer):
 
     def __repr__(self):
         level = get_level_name(self.level)
-        return f"<${self.__class__.__name__} (${level})>"
+        return "<${} (${})>".format(
+            self.__class__.__name__,
+            level
+        )
