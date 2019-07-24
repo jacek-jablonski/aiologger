@@ -261,14 +261,14 @@ class AsyncTimedRotatingFileHandler(BaseAsyncRotatingFileHandler):
         elif self.when.startswith("W"):
             if self.when not in RolloverInterval.WEEK_DAYS:
                 raise ValueError(
-                    f"Invalid day specified for weekly rollover: {self.when}"
+                    "Invalid day specified for weekly rollover: {}".format(self.when)
                 )
             self.interval = ONE_DAY_IN_SECONDS * 7  # one week
             self.day_of_week = int(self.when[1])
             self.suffix = "%Y-%m-%d"
             ext_match = r"^\d{4}-\d{2}-\d{2}(\.\w+)?$"
         else:
-            raise ValueError(f"Invalid RolloverInterval specified: {self.when}")
+            raise ValueError("Invalid RolloverInterval specified: {}".format(self.when))
 
         self.ext_match = re.compile(ext_match, re.ASCII)
         self.interval = self.interval * interval  # multiply by units requested
