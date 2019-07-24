@@ -132,7 +132,7 @@ class Formatter:
         """
         if style not in _STYLES:
             valid_styles = ",".join(_STYLES.keys())
-            raise ValueError(f"Style must be one of: {valid_styles}")
+            raise ValueError("Style must be one of: {}".format(valid_styles))
 
         self._style = _STYLES[style][0](fmt)
         self._fmt = self._style._fmt
