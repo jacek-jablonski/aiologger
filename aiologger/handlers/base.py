@@ -31,7 +31,7 @@ class Handler(Filterer):
         self,
         level: LogLevel = LogLevel.NOTSET,
         *,
-        loop: Optional[AbstractEventLoop] = None,
+        loop: Optional[AbstractEventLoop] = None
     ):
         """
         Initializes the instance - basically setting the formatter to None
