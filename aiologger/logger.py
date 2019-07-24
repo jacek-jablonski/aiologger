@@ -3,6 +3,7 @@ import io
 import sys
 import traceback
 from asyncio import AbstractEventLoop, Task
+from collections import namedtuple
 from typing import Iterable, Optional, Callable, Awaitable, List, NamedTuple
 
 from aiologger.filters import StdoutFilter, Filterer
@@ -16,11 +17,7 @@ from aiologger.utils import get_current_frame
 _HandlerFactory = Callable[[], Awaitable[Iterable[Handler]]]
 
 
-class _Caller(NamedTuple):
-    filename: str
-    line_number: int
-    function_name: str
-    stack: Optional[str]
+_Caller = namedtuple("_Called", ["filename", "line_number", "function_name", "stack"])
 
 
 def o_o():
