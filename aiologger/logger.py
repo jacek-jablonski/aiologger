@@ -49,9 +49,9 @@ class Logger(Filterer):
         self.level = check_level(level)
         self.parent = None
         self.propagate = True
-        self.handlers: List[Handler] = []
+        self.handlers = []
         self.disabled = False
-        self._loop: Optional[AbstractEventLoop] = loop
+        self._loop = loop
         self._was_shutdown = False
 
         self._dummy_task: Optional[Task] = None
@@ -69,8 +69,8 @@ class Logger(Filterer):
         *,
         name="aiologger",
         level=LogLevel.NOTSET,
-        formatter: Optional[Formatter] = None,
-        loop: Optional[AbstractEventLoop] = None,
+        formatter = None,
+        loop = None,
         **kwargs,
     ):
         self = cls(name=name, level=level, loop=loop, **kwargs)  # type: ignore
@@ -188,7 +188,7 @@ class Logger(Filterer):
         exc_info=None,
         extra=None,
         stack_info=False,
-        caller: _Caller = None,
+        caller = None,
     ):
 
         sinfo = None
