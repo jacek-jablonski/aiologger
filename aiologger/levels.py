@@ -30,18 +30,18 @@ def get_level_name(level: Union[int, LogLevel]) -> str:
     try:
         return LEVEL_TO_NAME[level]
     except KeyError as e:
-        raise ValueError(f"Unkown level name: {level}") from e
+        raise ValueError("Unkown level name: {}".format(level)) from e
 
 
 def check_level(level: Union[str, int, LogLevel]) -> int:
     if isinstance(level, int):
         if level not in LEVEL_TO_NAME:
-            raise ValueError(f"Unknown level: {level}")
+            raise ValueError("Unknown level: {}".format(level))
         return level
     elif isinstance(level, str):
         try:
             return NAME_TO_LEVEL[level]
         except KeyError:
-            raise ValueError(f"Unknown level: {level}")
+            raise ValueError("Unknown level: {}".format(level))
     else:
-        raise TypeError(f"Level not an Union[str, int, LogLevel]: {level}")
+        raise TypeError("Level not an Union[str, int, LogLevel]: {}".format(level))
