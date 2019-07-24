@@ -96,8 +96,15 @@ class LogRecord:
 
     def __str__(self):
         return (
-            f"<{self.__class__.__name__}: {self.name}, {self.levelname}, "
-            f'{self.pathname}, {self.lineno}, "{self.msg}">'
+            "<{}: {}, {}, "
+            '{}, {}, "{}">'.format(
+                self.__class__.__name__,
+                self.name,
+                self.levelname,
+                self.pathname,
+                self.lineno,
+                self.msg
+            )
         )
 
     __repr__ = __str__
