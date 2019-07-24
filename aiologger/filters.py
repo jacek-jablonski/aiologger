@@ -60,7 +60,7 @@ class Filterer(ABC):
         """
         Initialize the list of filters to be an empty list.
         """
-        self.filters: List[Union[Filter, _FilterCallable]] = []
+        self.filters = []
 
     def add_filter(self, filter: Filter):
         """
