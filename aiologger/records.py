@@ -68,8 +68,8 @@ class LogRecord:
         if args:
             if len(args) != 1 or not isinstance(args[0], Mapping):
                 raise ValueError(
-                    f"Invalid LogRecord args type: {type(args[0])}. "
-                    f"Expected Mapping"
+                    "Invalid LogRecord args type: {}. ".format(type(args[0]))
+                    "Expected Mapping"
                 )
             self.args = args[0]
         else:
